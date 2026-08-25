@@ -1,5 +1,5 @@
-# wireless-mouse-hardware-teardown
-  > Hands-on teardown and reverse engineering of a wireless mouse to study its embedded hardware, PCB architecture, electronic components, optical sensor, RF communication, power management, and working principle.
+wireless-mouse-hardware-teardown
+   Hands-on teardown and reverse engineering of a wireless mouse to study its embedded hardware, PCB architecture, electronic components, optical sensor, RF communication, power management, and working principle.
 wireless mouse works
 > 
 ![Image](https://images.openai.com/static-rsc-4/9bPrhveaa8mkyAbVwfq_6ECaidir3ok6oP-0rFnFxjKQBeog_M4PFB7k45gngbNSw6URFVbhqgSujVReg61Fk02JUeVicL1NLL3lmjHuMGxWDGd09KQgIW9XX7LiOX6VpUIFGBnCyMKId1JiYRbOQW7pnT3X7i2tc-ReJPazhgG5k0tW5ZNQyLwp31-h0CjZ?purpose=fullsize)
