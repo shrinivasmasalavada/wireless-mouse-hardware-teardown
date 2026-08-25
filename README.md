@@ -1,5 +1,128 @@
 # wireless-mouse-hardware-teardown
   > Hands-on teardown and reverse engineering of a wireless mouse to study its embedded hardware, PCB architecture, electronic components, optical sensor, RF communication, power management, and working principle.
+wireless mouse works
+> 
+![Image](https://images.openai.com/static-rsc-4/9bPrhveaa8mkyAbVwfq_6ECaidir3ok6oP-0rFnFxjKQBeog_M4PFB7k45gngbNSw6URFVbhqgSujVReg61Fk02JUeVicL1NLL3lmjHuMGxWDGd09KQgIW9XX7LiOX6VpUIFGBnCyMKId1JiYRbOQW7pnT3X7i2tc-ReJPazhgG5k0tW5ZNQyLwp31-h0CjZ?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/pK_Lr_xskkt-d16SYfwNWSLRnmoABSFjdnySRWEQuUqbLyYWzs-vuKAxraFxD486jii59wtN1dN1N2L_0nn9SKyLIzQyM6b7c_UdKqjU6-qeVSsicXYb3-BhUuJkdTg1s0TvW44xwMxYF3uReGkCorJj_Os_tQqMAnR-wnMSh1-7u6eUYo2iOYZRxSq3Plbm?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/IdOY8EFfw0vqJiGqoG9VsfjAa4QlK7d7zOO3MCPPUK2FJkwqqJSaL0mslJXqy2CZWMZsvd4R0tN1cnMC2mk_pDXg-RPcsDgaIhNmfvadFqLpfeo2Iz-OGtywNNu-MF6ZfZHQuoYYuPrBJWpOL7-a7aZ1YPxVXN_gD0a0nJpZKTskbs-mk3Je-UXCyLLxLPuI?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/9mcE1W8Aq98DKDKXTAivb7fqYQGdlwPbDZQAC4pwwhnaeIUnk7nDM3KMyH2uOoRMjISHw1o-pOWQtGJNsuw_-AG8MyGp2Fxcmrt2W48TMv40YeVyxdgmLLwqkyiYqShqay7JaDEDYSXZeuTxkXHUXCIdkLv4gZTBFOIsds9hLtTZqSaGaAZTUwZawlbUwhXP?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/vy-EJYZHB2LrZLtyr783QM_R7PyZjEUYYiZJuoIwHR2lX86SH81AJ2QQ5OB1IZV3vqg9ksKqfW-uk4lZGExbWsmb35kVLvlvOBUnIRCubj2FbJDjYEXgG6RkCno8_Gr_B66P07_nWApi_fPoFgHQoPgSm56TKjL4lDA974OrXgjVlYoCYIEmEMYh65SigJRd?purpose=fullsize)
+
+![Image](https://images.openai.com/static-rsc-4/Ljz-HAWOA346MvwZJkImA-lqjTcEvmTZvk765lkq3h4yqt3RGa7681NeJ-RPEoU1ad_1FWvOpOAh2-p1Cp6P8-u0NmHmy6ohERNb9swQuYxfDGwfGL3x6Dbsu6VNzTGzi7CDkaTmr1xX8Ht-ozjkCXJ3o7yELjbbuCJX1T1w5KvX0FT5vndZ8SbPqq3nML2L?purpose=fullsize)
+
+### 🖱️ Wireless mouse: complete flow
+
+```text
+        DESK SURFACE
+             ↓
+       LED / IR light
+             ↓
+       Optical Sensor
+             ↓
+     Motion Processor
+             ↓
+      Microcontroller
+             ↓
+     2.4 GHz / Bluetooth
+             ↓
+     USB Receiver / PC
+             ↓
+        Cursor moves
+```
+
+### 1. The sensor detects movement
+
+Under the mouse is a tiny **optical sensor**.
+
+It takes thousands of images of the desk surface every second.
+
+When you move the mouse:
+
+```text
+Before movement:   [texture pattern]
+After movement:       [texture pattern]
+                         →→→
+```
+
+The sensor calculates the change in **X and Y direction**.
+
+### 2. The microcontroller processes it
+
+A small MCU inside the mouse receives data such as:
+
+```text
+X = +12
+Y = -5
+Left button = 0
+Right button = 1
+Scroll = 0
+```
+
+It packages this into a mouse data packet.
+
+### 3. Wireless transmission
+
+The mouse then transmits those packets using either:
+
+**2.4 GHz RF**
+or
+**Bluetooth**
+
+For a typical 2.4 GHz mouse:
+
+```text
+Mouse
+  │
+  │ 2.4 GHz RF
+  ↓
+USB Receiver
+  ↓
+Computer
+```
+
+The USB receiver acts as the bridge between the wireless mouse and the computer.
+
+### 4. The computer receives the packet
+
+The computer's operating system receives something like:
+
+```text
+Movement:
+X = +12
+Y = -5
+
+Button:
+Left = 0
+Right = 1
+```
+
+It converts that into cursor movement.
+
+### 🔋 Where does the battery come in?
+
+The battery powers:
+
+* Optical sensor
+* LED/IR emitter
+* MCU
+* RF/Bluetooth chip
+* Buttons/encoder
+
+That's why wireless mice need batteries or rechargeable cells.
+
+### 🔥 The interesting part
+
+A wireless mouse is actually a **small embedded system**:
+
+**Sensor + optics + MCU + RF communication + power management + firmware**
+
+So if you're interested in **Embedded Systems + Wireless Networking**, a wireless mouse is a very good simple example of how all these components work together.
+
+If you want, I can also explain **the actual 2.4 GHz wireless communication inside a mouse packet-by-packet**, from the sensor all the way to the laptop.
 
 A computer mouse detects movement using a **sensor underneath the mouse**. The exact method depends on whether it is an **optical** or **laser** mouse.
 
